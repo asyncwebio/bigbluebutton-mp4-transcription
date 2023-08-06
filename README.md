@@ -13,13 +13,13 @@ The BigBlueButton Transcription Plugin is a powerful tool that enables automatic
 
 ## 💡 Features
 
-🎙️ Automatic transcription of recorded sessions\
-🔗 Seamless integration with Google Speech-to-Text\
-🔧 Easy installation and configuration\
-📝 Transcribed text avaibale via API\
-🌐 Supports a variety of languages and accents\
-📅 Timestamps for easy navigation within the transcript\
-📞 Callbacks for custom integrations
+- Automatic transcription of recorded sessions
+- Seamless integration with Google Speech-to-Text
+- Easy installation and configuration
+- Transcribed text avaibale via API
+- Supports a variety of languages and accents
+- Timestamps for easy navigation within the transcript
+- Callbacks for custom integrations
 
 ## 📋 Requirements
 
