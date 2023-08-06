@@ -1,0 +1,4 @@
+# redirect a user to the class notes page
+location /transcripts {
+    root /var/bigbluebutton/;
+}
