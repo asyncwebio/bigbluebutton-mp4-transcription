@@ -4,12 +4,12 @@ The BigBlueButton Transcription Plugin is a powerful tool that enables automatic
 
 ## Table of Contents
 
-- [💡 Features](#features)
-- [📋 Requirements](#requirements)
-- [📦 Installation](#installation)
-- [🔎 How it works](#how-it-works)
-- [📖 Usage](#usage)
-- [🗑️ Uninstall](#uninstall)
+- [💡 Features](#-features)
+- [📋 Requirements](#-requirements)
+- [📦 Installation](#-installation)
+- [🔎 How it works](#-how-it-works)
+- [📖 Usage](#-usage)
+- [🗑️ Uninstall](#-uninstall)
 
 ## 💡 Features
 
