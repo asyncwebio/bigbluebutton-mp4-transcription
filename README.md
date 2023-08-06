@@ -70,20 +70,20 @@ The BigBlueButton Transcription Plugin extracts the audio from the recorded sess
 
 1. You need to pass below meta tags while creating the meeting
 
-   `bbb-transcription-ready-url`: A URL that will be called when the transcription is ready. The URL will be called with the json payload with following parameters:
+   - `bbb-transcription-ready-url`: A URL that will be called when the transcription is ready. The URL will be called with the json payload with following parameters:
 
-   ```
-   meeting_name
-   start_time
-   end_time
-   meeting_id
-   transcription_url
+     ```
+     meeting_name
+     start_time
+     end_time
+     meeting_id
+     transcription_url
 
-   ```
+     ```
 
-   `bbb-transcription-enabled`: Set this to `true` to enable transcription for the meeting.
+   - `bbb-transcription-enabled`: Set this to `true` to enable transcription for the meeting.
 
-   `bbb-transcription-source-language`: The language spoken in the meeting. The value should be a valid language code. For example, `en-US` for English (United States), `en-GB` for English (United Kingdom), `fr-FR` for French (France), etc. You can check allowed language codes [here](https://cloud.google.com/speech-to-text/docs/languages).
+   - `bbb-transcription-source-language`: The language spoken in the meeting. The value should be a valid language code. For example, `en-US` for English (United States), `en-GB` for English (United Kingdom), `fr-FR` for French (France), etc. You can check allowed language codes [here](https://cloud.google.com/speech-to-text/docs/languages).
 
 2. You can access the transcript of the meeting using the below url format:
 
