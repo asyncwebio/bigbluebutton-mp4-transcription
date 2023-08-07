@@ -1,0 +1,32 @@
+{
+  "name": "bbb-mp4",
+  "version": "2.3.0",
+  "description": "Capture BBB recording & export as a video",
+  "scripts": {
+    "example": "node bbb-mp4.js \"https://BBB_HOST/playback/presentation/2.3/MEETING_ID\""
+  },
+  "keywords": [
+    "record",
+    "chrome",
+    "puppeteer",
+    "bbb-mp4",
+    "bigbluebutton",
+    "bbb"
+  ],
+  "dependencies": {
+    "axios": "^1.4.0",
+    "puppeteer": "^9.1.1",
+    "xvfb": "^0.4.0"
+  },
+  "main": "bbb-mp4.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manishkatyan/bbb-mp4"
+  },
+  "author": "HEL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manishkatyan/bbb-mp4/issues"
+  },
+  "homepage": "https://github.com/manishkatyan/bbb-mp4#readme"
+}
