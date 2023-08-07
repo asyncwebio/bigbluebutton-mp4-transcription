@@ -18,7 +18,6 @@ The BigBlueButton Transcription Plugin is a powerful tool that enables automatic
 - Easy installation and configuration
 - Transcribed text avaibale via API
 - Supports a variety of languages and accents
-- Timestamps for easy navigation within the transcript
 - Callbacks for custom integrations
 
 ## 📋 Requirements
