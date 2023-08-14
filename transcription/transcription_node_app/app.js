@@ -119,7 +119,7 @@ async function main() {
             .join('\n');
 
         child_process.execSync(`mkdir -p transcripts/${meetingId}`)
-        child_process.execSync(`echo ${transcription} >> ${meetingId}/${meetingId}.txt`)
+        child_process.execSync(`echo ${transcription} >> transcripts/${meetingId}/transcript.txt`)
 
         // delete audio file
         await storage.bucket(bucketName).file(`audios/${meetingId}.wav`).delete()

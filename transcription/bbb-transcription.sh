@@ -1,13 +1,45 @@
 #!/bin/bash
 
-FILE_NAME=$1
-MEETING_ID=$2
-LANGUAGE_CODE=$3
-CALLBACK_URL=$4
-TRANSCRIPTION_URL=$5
-MEETING_NAME=$6
-START_TIME=$7
-END_TIME=$8
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+    --file-name)
+        FILE_NAME="$2"
+        shift 2
+        ;;
+    --meeting-id)
+        MEETING_ID="$2"
+        shift 2
+        ;;
+    --language-code)
+        LANGUAGE_CODE="$2"
+        shift 2
+        ;;
+    --callback-url)
+        CALLBACK_URL="$2"
+        shift 2
+        ;;
+    --transcription-url)
+        TRANSCRIPTION_URL="$2"
+        shift 2
+        ;;
+    --meeting-name)
+        MEETING_NAME="$2"
+        shift 2
+        ;;
+    --start-time)
+        START_TIME="$2"
+        shift 2
+        ;;
+    --end-time)
+        END_TIME="$2"
+        shift 2
+        ;;
+    *)
+        echo "Unknown option: $1" | systemd-cat -p warning -t bbb-transcribe
+        exit 1
+        ;;
+    esac
+done
 echo "Transcribing $MEETING_ID" | systemd-cat -p warning -t bbb-transcribe
 
 docker run --rm \

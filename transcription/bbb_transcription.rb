@@ -22,7 +22,7 @@ bbb_web_properties = "/etc/bigbluebutton/bbb-web.properties"
 events_xml = "/var/bigbluebutton/recording/raw/#{meeting_id}/events.xml"
 recording_path = "/var/bigbluebutton/published/presentation/#{meeting_id}"
 transcript_folder = "/var/bigbluebutton/transcripts/#{meeting_id}"
-transcript_file = "#{transcript_folder}/transcript.json"
+transcript_file = "#{transcript_folder}/transcript.txt"
 webcams_file_path = "#{recording_path}/video"
 video_format = "mp4"
 
@@ -90,8 +90,13 @@ begin
   callback_url = get_callback_url(events_xml)
   transcription_enabled = is_transcription_enabled(events_xml)
   transcript_language = get_source_language(events_xml)
+  transcription_url = "#{bbb_url}/transcripts/#{meeting_id}/transcript.txt"
+  meeting_name = events_data.metadata["meetingName"]
+  start_time = events_data.start
+  end_time = events_data.finish
+
   BigBlueButton.logger.info("callback_url: #{callback_url} transcription_enabled: #{transcription_enabled}")
-  unless callback_url.nil? || !transcription_enabled || transcript_language.nil?
+  unless !transcription_enabled
     ffmped_cmd = "ffmpeg -y -i  #{webcams_file_path}/webcams.#{video_format} -vn -acodec pcm_s16le -ar 44100 -ac 2 #{webcams_file_path}/audio.wav"
     status = system(ffmped_cmd)
     BigBlueButton.logger.info("ffmpeg command status: #{status}")
@@ -102,48 +107,19 @@ begin
       audio_file = "#{webcams_file_path}/audio.wav"
       BigBlueButton.logger.info("Processing transcription for #{meeting_id}")
 
-      response = `node /usr/local/bigbluebutton/core/scripts/post_publish/transcription_node_app/app.js #{audio_file} #{meeting_id} #{transcript_language}`
-      transcription_data = JSON.parse(response)
+      args = [ "--file-name #{audio_file}", "--meeting-id #{meeting_id}", "--transcription-url #{transcription_url}", "--meeting-name #{meeting_name}", "--start-time #{start_time}", "--end-time #{end_time}"]
 
-      if transcription_data["status"] == "error"
-        raise transcription_data["error"]
+      if !transcript_language.nil?
+        args << "--language-code #{transcript_language}"
+      else
+        args << "--language-code en-US"
       end
 
-      if transcription_data["status"] == "completed"
-        BigBlueButton.logger.info("Transcription in completed for #{meeting_id}")
-        is_transcription_done = true
+      args << "--callback-url #{callback_url}" if !callback_url.nil?
 
-        data_to_write = {
-          "meeting_name" => events_data.metadata["meetingName"],
-          "start_time" => events_data.start,
-          "end_time" => events_data.finish,
-          "meeting_id" => meeting_id,
-          "transcription" => transcription_data["text"],
-        }
-
-        system("mkdir -p #{transcript_folder}")
-        FileUtils.touch(transcript_file) if !File.file? (transcript_file)
-        File.write(transcript_file, data_to_write.to_json)
-
-        # Make a callback to the callback url only if the transcription file exists
-        if File.file?(transcript_file)
-          callback_data = {
-            "meeting_name" => events_data.metadata["meetingName"],
-            "start_time" => events_data.start,
-            "end_time" => events_data.finish,
-            "meeting_id" => meeting_id,
-            "transcription_url" => "#{bbb_url}/transcripts/#{meeting_id}/transcript.json",
-          }
-          response = http_client(callback_url, "post", callback_data)
-
-          # check if the callback is successful using headers
-          if response.code == "200"
-            BigBlueButton.logger.info("Transcription ready callback successful for #{meeting_id}")
-          else
-            BigBlueButton.logger.info("Transcription ready callback failed for #{meeting_id} with status code #{response.code}")
-          end
-        end
-      end
+      command = "bash /var/www/bigbluebutton-mp4-transcription/transcription/bbb-transcription.sh #{args.join(" ")}"
+      response = `#{command}`
+      BigBlueButton.logger.info("Transcription run status: #{response}")
     end
   end
 rescue Exception => e

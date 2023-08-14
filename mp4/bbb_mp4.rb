@@ -31,7 +31,7 @@ begin
   callback_url = get_callback_url(meeting_metadata)
 
   if is_mp4_enabled
-    bbb_mp4_cmd = "bash /var/www/bbb-mp4/bbb-mp4.sh #{meeting_id} #{callback_url} &"
+    bbb_mp4_cmd = "bash /var/www/bigbluebutton-mp4-transcription/mp4/bbb-mp4.sh #{meeting_id} #{callback_url} &"
     status = system (bbb_mp4_cmd)
     BigBlueButton.logger.info("MP4 conversion started for #{meeting_id}: #{status}")
   else
