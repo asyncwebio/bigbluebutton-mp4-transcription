@@ -45,6 +45,7 @@ echo "Transcribing $MEETING_ID" | systemd-cat -p warning -t bbb-transcribe
 docker run --rm \
     --name $MEETING_ID_transcribe \
     -v /var/bigbluebutton/transcripts:/usr/src/app/transcripts \
+    -v /var/bigbluebutton/published/presentation/$MEETING_ID:/usr/src/app/presentation \
     -v /var/www/bigbluebutton-mp4-transcription/transcription/logs:/usr/src/app/logs \
     -v /var/www/bigbluebutton-mp4-transcription/transcription/auth-key.json:/usr/src/app/auth-key.json \
     --env FILE_NAME=$FILE_NAME \

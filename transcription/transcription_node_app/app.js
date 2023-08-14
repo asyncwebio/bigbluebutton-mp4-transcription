@@ -11,7 +11,6 @@ const serviceKey = path.join(__dirname, '/usr/src/app/auth-key.json')
 
 
 // get file name from command line
-const fileName = process.env.FILE_NAME;
 const meetingId = process.env.MEETING_ID;
 const languageCode = process.env.LANGUAGE_CODE;
 const callbackUrl = process.env.CALLBACK_URL;
@@ -20,6 +19,7 @@ const meetingName = process.env.MEETING_NAME;
 const startTime = process.env.START_TIME;
 const endTime = process.env.END_TIME;
 
+const fileName = `presentation/${meetingId}/video/audio.wav`;
 // Creates a client
 const client = new SpeechClient({
     // get auth key json file from  current directory
@@ -60,7 +60,7 @@ async function sendCallback() {
                 status: "success",
                 meetingId,
                 statusCode: response.status
-            })} >> logs/callback-error.log`)
+            })} >> logs / callback - error.log`)
         }
         else {
             // log the success status
@@ -69,7 +69,7 @@ async function sendCallback() {
                 meetingId,
                 statusCode: response.status
             })
-                } >> logs/callback-success.log`)
+                } >> logs / callback - success.log`)
         }
 
     } catch (error) {
@@ -80,14 +80,16 @@ async function sendCallback() {
                 meetingId,
                 statusCode: error.response.status,
                 error: error.response.data
-            })} >> logs/callback-error.log`)
+            })
+                } >> logs / callback - error.log`)
         }
         else {
             child_process.execSync(`echo ${JSON.stringify({
                 status: "error",
                 meetingId,
                 error: error.message
-            })} >> logs/callback-error.log`)
+            })
+                } >> logs / callback - error.log`)
         }
     }
 }
@@ -95,7 +97,7 @@ async function sendCallback() {
 async function main() {
     try {
         await bucket.upload(fileName, {
-            destination: `audios/${meetingId}.wav`,
+            destination: `audios / ${meetingId}.wav`,
         })
 
         const request = {
@@ -118,8 +120,15 @@ async function main() {
             .map(result => result.alternatives[0].transcript)
             .join('\n');
 
-        child_process.execSync(`mkdir -p transcripts/${meetingId}`)
-        child_process.execSync(`echo ${transcription} >> transcripts/${meetingId}/transcript.txt`)
+        if (transcription) {
+            child_process.execSync(`mkdir -p transcripts/${meetingId}`)
+            child_process.execSync(`echo ${transcription} >> transcripts/${meetingId}/transcript.txt`)
+        }
+
+        // send callback
+        if (callbackUrl) {
+            await sendCallback()
+        }
 
         // delete audio file
         await storage.bucket(bucketName).file(`audios/${meetingId}.wav`).delete()
