@@ -1,6 +1,6 @@
-# BigBlueButton Transcription Plugin
+# BigBlueButton-MP4-Transcription Plugin
 
-The BigBlueButton Transcription Plugin is a powerful tool that enables automatic transcription of recorded sessions in BigBlueButton using Google Speech-to-Text. With this plugin, you can easily convert your recorded sessions into text, making it more accessible and searchable.
+The BigBlueButton-MP4-Transcription Plugin is a powerful tool that enables automatic transcription and mp4 converstion of recorded sessions in BigBlueButton. With this plugin, you can easily convert your recorded sessions into text and mp4 formate, making it more accessible.
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ The BigBlueButton Transcription Plugin is a powerful tool that enables automatic
 
 ## 💡 Features
 
-- Automatic transcription of recorded sessions
+- Automatic transcription and mp4 convertion of recorded sessions
 - Seamless integration with Google Speech-to-Text
 - Easy installation and configuration
 - Transcribed text avaibale via API
@@ -23,6 +23,7 @@ The BigBlueButton Transcription Plugin is a powerful tool that enables automatic
 ## 📋 Requirements
 
 - BigBlueButton server 2.6 or later
+- Playback of recordings on ios enabled (see [here](https://docs.bigbluebutton.org/administration/customize#enable-playback-of-recordings-on-ios) for more details)
 - Google Cloud Speech-to-Text APIs enabled
 - Google Cloud Storage APIs enabled
 - Google Cloud Storage bucket with name `bbb-transcription` (for storing audio files and transcripts)
@@ -35,13 +36,14 @@ To install the BigBlueButton Transcription Plugin, follow these steps:
 1. Clone the repository to your BigBlueButton server:
 
    ```bash
-   git clone https://github.com/AsyncWeb/bigbluebutton-transcription.git
+   cd /var/www
+   git clone https://github.com/AsyncWeb/bigbluebutton-mp4-transcription.git
    ```
 
 2. Navigate to the plugin directory
 
    ```bash
-   cd bigbluebutton-transcription
+   cd bigbluebutton-mp4-transcription
    ```
 
 3. Add google auth credentials to the `transcription_node_app` directory:
@@ -63,13 +65,18 @@ To install the BigBlueButton Transcription Plugin, follow these steps:
 
 ## 🔎 How it works
 
-The BigBlueButton Transcription Plugin extracts the audio from the recorded sessions and uploads it to Google Cloud Storage. The audio is then transcribed using Google Speech-to-Text. The transcript is then saved in a Google Cloud Storage. Once the process is complete, the plugin calls the `bbb-transcription-ready-url` with the transcript URL.
+Transcription: Plugin extracts the audio from the recorded sessions and uploads it to Google Cloud Storage. The audio is then transcribed using Google Speech-to-Text. The transcript is then saved in a Google Cloud Storage. Once the process is complete, the plugin calls the `bbb-transcription-ready-url` with the transcript URL.
+
+MP4: Plugin converts the recorded session to mp4 format using the `ffmpeg` library. Once the process is complete, the plugin calls the `bbb-mp4-ready-url` with the mp4 URL.
 
 ## 📖 Usage
 
 1. You need to pass below meta tags while creating the meeting
 
-   - `bbb-transcription-ready-url`: A URL that will be called when the transcription is ready. The URL will be called with the json payload with following parameters:
+   - `bbb-transcription-enabled`: Set this to `true` to enable transcription for the meeting.
+   - `bbb-mp4-enabled`: Set this to `true` to enable mp4 convertion of recording for the meeting.
+
+   - `bbb-transcription-ready-url` (optional): A URL that will be called when the transcription is ready. The URL will be called with the json payload with following parameters:
 
      ```
      meeting_name
@@ -80,22 +87,35 @@ The BigBlueButton Transcription Plugin extracts the audio from the recorded sess
 
      ```
 
-   - `bbb-transcription-enabled`: Set this to `true` to enable transcription for the meeting.
+   - `bbb-mp4-ready-url` (optional): The URL will be called with the json payload with following parameters when the mp4 conversion is complete:
 
-   - `bbb-transcription-source-language`: The language spoken in the meeting. The value should be a valid language code. For example, `en-US` for English (United States), `en-GB` for English (United Kingdom), `fr-FR` for French (France), etc. You can check allowed language codes [here](https://cloud.google.com/speech-to-text/docs/languages).
+     ```
+      recordingId,
+      mp4Url
 
-2. You can access the transcript of the meeting using the below url format:
+     ```
 
-   ```bash
-   https://<your-bbb-server>/transcripts/<internal-meeting-id>/transcript.json
-   ```
+   - `bbb-transcription-source-language` (optional): The language spoken in the meeting. The value should be a valid language code. For example, `en-US` for English (United States), `en-GB` for English (United Kingdom), `fr-FR` for French (France), etc. You can check allowed language codes [here](https://cloud.google.com/speech-to-text/docs/languages).
+
+2. You can access the transcript and mp4 of the meeting using the below url formats:
+
+- Transcription:
+
+  ```bash
+  https://<your-bbb-server>/transcripts/<internal-meeting-id>/transcript.json
+  ```
+
+- MP4:
+  ```bash
+   https://<your-bbb-server>/recording/<internal-meeting-id>.mp4
+  ```
 
 ## 🗑️ Uninstall
 
-To uninstall the BigBlueButton Transcription Plugin, run the following command:
+To uninstall the BigBlueButton-MP4-Transcription Plugin, run the following command:
 
 ```bash
-cd bigbluebutton-transcription
+cd bigbluebutton-mp4-transcription
 bash uninstall.sh
 ```
 

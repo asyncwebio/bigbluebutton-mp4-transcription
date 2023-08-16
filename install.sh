@@ -1,9 +1,18 @@
 #!/bin/bash
 
-sudo cp -r bbb_transcription.rb /usr/local/bigbluebutton/core/scripts/post_publish/bbb_transcription.rb
-cd transcription_node_app && npm install && cd ..
-sudo cp -r transcription_node_app /usr/local/bigbluebutton/core/scripts/post_publish/
-sudo mkdir -p /var/bigbluebutton/transcripts
-sudo chown -R bigbluebutton:bigbluebutton /var/bigbluebutton/transcripts
-cat transcription.nginx | sudo tee /etc/bigbluebutton/nginx/transcription.nginx
-sudo nginx -t && sudo nginx -s reload
+# only run as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
+    exit
+fi
+
+echo "Installing BigBlueButton-MP4-Transcription"
+
+# Transcription
+cd transcription
+sudo bash bbb-transcription-install.sh
+cd ..
+
+# mp4
+cd mp4
+sudo bash bbb-mp4-install.sh

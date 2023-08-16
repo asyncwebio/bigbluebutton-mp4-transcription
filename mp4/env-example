@@ -1,2 +1,1 @@
 BBB_DOMAIN_NAME=bbb.example.com
-COPY_TO_LOCATION=/var/www/bigbluebutton-default/recording
