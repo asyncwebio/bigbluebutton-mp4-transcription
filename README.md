@@ -115,7 +115,7 @@ MP4: Plugin converts the recorded session to mp4 format using the `ffmpeg` libra
 To uninstall the BigBlueButton-MP4-Transcription Plugin, run the following command:
 
 ```bash
-cd bigbluebutton-mp4-transcription
+cd /var/www/bigbluebutton-mp4-transcription
 bash uninstall.sh
 ```
 
