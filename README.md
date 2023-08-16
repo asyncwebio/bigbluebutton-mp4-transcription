@@ -57,6 +57,14 @@ To install the BigBlueButton Transcription Plugin, follow these steps:
 
    You can find the credentials in the [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
 
+   - Login to your Google Cloud Console.
+   - Create a new project or select an existing one.
+   - Go to the `APIs & Services`
+   - Click on `Enable APIs and Services` and enable `Cloud Speech-to-Text API` and `Cloud Storage API`.
+   - Goto `Credentials` and click on `Create Credentials`.
+   - Follow the steps and create a new service account.
+   - Download the credentials in json format and copy the contents to `auth-key.json` file.
+
 4. Install the plugin:
 
    ```bash
@@ -73,8 +81,8 @@ MP4: Plugin converts the recorded session to mp4 format using the `ffmpeg` libra
 
 1. You need to pass below meta tags while creating the meeting
 
-   - `bbb-transcription-enabled`: Set this to `true` to enable transcription for the meeting.
-   - `bbb-mp4-enabled`: Set this to `true` to enable mp4 convertion of recording for the meeting.
+   - `bbb-transcription-enabled`: Set this to `true` to enable transcription for the meeting. Default is `false`.
+   - `bbb-mp4-enabled`: Set this to `true` to enable mp4 convertion of recording for the meeting. Default is `false`.
 
    - `bbb-transcription-ready-url` (optional): A URL that will be called when the transcription is ready. The URL will be called with the json payload with following parameters:
 
@@ -90,7 +98,7 @@ MP4: Plugin converts the recorded session to mp4 format using the `ffmpeg` libra
    - `bbb-mp4-ready-url` (optional): The URL will be called with the json payload with following parameters when the mp4 conversion is complete:
 
      ```
-      recordingId,
+      recordingId
       mp4Url
 
      ```
