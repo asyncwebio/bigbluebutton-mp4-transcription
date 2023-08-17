@@ -127,6 +127,11 @@ cd /var/www/bigbluebutton-mp4-transcription
 bash uninstall.sh
 ```
 
+
+
+<br /> <br />
+<img alt="bigbluebutton-mp4-transcription"  src="/static/chart.png"/>
+
 <br/><br/>
 
 ## 🚀 <a href="https://higheredlab.com" target="_blank">Ready to Transform Your Online Teaching Experience?</a>
