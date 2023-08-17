@@ -77,6 +77,9 @@ Transcription: Plugin extracts the audio from the recorded sessions and uploads 
 
 MP4: Plugin converts the recorded session to mp4 format using the `ffmpeg` library. Once the process is complete, the plugin calls the `bbb-mp4-ready-url` with the mp4 URL.
 
+<br /> <br />
+<img alt="bigbluebutton-mp4-transcription"  src="/static/chart.png"/>
+<br /> <br />
 ## 📖 Usage
 
 1. You need to pass below meta tags while creating the meeting
@@ -126,11 +129,6 @@ To uninstall the BigBlueButton-MP4-Transcription Plugin, run the following comma
 cd /var/www/bigbluebutton-mp4-transcription
 bash uninstall.sh
 ```
-
-
-
-<br /> <br />
-<img alt="bigbluebutton-mp4-transcription"  src="/static/chart.png"/>
 
 <br/><br/>
 
