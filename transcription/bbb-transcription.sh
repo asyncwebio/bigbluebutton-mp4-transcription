@@ -43,7 +43,11 @@ done
 
 echo "Transcribing $MEETING_ID" | systemd-cat -p warning -t bbb-transcribe
 
-docker run -d --rm --name $NAME \
+NAME="${MEETING_ID}_transcribe"
+
+
+
+docker run  -d --rm  --name $NAME \
     -v /var/bigbluebutton/transcripts:/usr/src/app/transcripts \
     -v /var/bigbluebutton/published/presentation/$MEETING_ID:/usr/src/app/presentation/$MEETING_ID \
     -v /var/www/bigbluebutton-mp4-transcription/transcription/logs:/usr/src/app/logs \
@@ -54,6 +58,6 @@ docker run -d --rm --name $NAME \
     --env CALLBACK_URL=$CALLBACK_URL \
     --env TRANSCRIPTION_URL=$TRANSCRIPTION_URL \
     --env MEETING_NAME=$MEETING_NAME \
-    --env START_TIME=$START_TIME \
-    --env END_TIME=$END_TIME \
+    --env START_TIME="$START_TIME" \
+    --env END_TIME="$END_TIME" \
     manishkatyan/bbb-transcription

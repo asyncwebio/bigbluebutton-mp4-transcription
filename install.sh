@@ -8,6 +8,9 @@ fi
 
 echo "Installing BigBlueButton-MP4-Transcription"
 
+# add bigbluebutton user to docker group
+sudo usermod -aG docker bigbluebutton
+
 # Transcription
 cd transcription
 sudo bash bbb-transcription-install.sh
@@ -16,6 +19,7 @@ cd ..
 # mp4
 cd mp4
 sudo bash bbb-mp4-install.sh
+cd ..
 
 echo "Updating index.html of recording page to add transcript/mp4 button."
 if [ ! -f "/var/bigbluebutton/playback/presentation/2.3/index_default.html" ]; then

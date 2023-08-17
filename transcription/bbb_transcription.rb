@@ -87,6 +87,8 @@ end
 events_data = BBBEvents.parse(events_xml)
 
 begin
+  props = JavaProperties::Properties.new(bbb_web_properties)
+  bbb_url = props["bigbluebutton.web.serverURL"].strip()
   callback_url = get_callback_url(events_xml)
   transcription_enabled = is_transcription_enabled(events_xml)
   transcript_language = get_source_language(events_xml)
@@ -102,12 +104,10 @@ begin
     BigBlueButton.logger.info("ffmpeg command status: #{status}")
 
     if status
-      props = JavaProperties::Properties.new(bbb_web_properties)
-      bbb_url = props["bigbluebutton.web.serverURL"].strip()
       audio_file = "#{webcams_file_path}/audio.wav"
       BigBlueButton.logger.info("Processing transcription for #{meeting_id}")
 
-      args = [ "--file-name #{audio_file}", "--meeting-id #{meeting_id}", "--transcription-url #{transcription_url}", "--meeting-name #{meeting_name}", "--start-time #{start_time}", "--end-time #{end_time}"]
+      args = [ "--file-name #{audio_file}", "--meeting-id #{meeting_id}", "--transcription-url #{transcription_url}", "--meeting-name #{meeting_name}", "--start-time \"#{start_time}\"", "--end-time \"#{end_time}\""]
 
       if !transcript_language.nil?
         args << "--language-code #{transcript_language}"
@@ -118,7 +118,8 @@ begin
       args << "--callback-url #{callback_url}" if !callback_url.nil?
 
       command = "bash /var/www/bigbluebutton-mp4-transcription/transcription/bbb-transcription.sh #{args.join(" ")}"
-      response = `#{command}`
+      BigBlueButton.logger.info("Running command #{command}")
+      response = system(command)
       BigBlueButton.logger.info("Transcription run status: #{response}")
     end
   end

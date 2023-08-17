@@ -2,7 +2,7 @@
 
 # Load .env variables
 set -a
-source <(cat .env |
+source <(cat /var/www/bigbluebutton-mp4-transcription/mp4/.env |
     sed -e '/^#/d;/^\s*$/d' -e "s/'/'\\\''/g" -e "s/=\(.*\)/='\1'/g")
 set +a
 
@@ -15,4 +15,4 @@ docker run --rm -d --name $MEETING_ID \
     -v /home/ubuntu/bigbluebutton-mp4-transcription/mp4/logs:/usr/src/app/logs \
     --env REC_URL=https://$BBB_DOMAIN_NAME/playback/presentation/2.3/$MEETING_ID \
     --env CALLBACK_URL=$CALLBACK_URL \
-    manishkatyan/bbb-mp4
+    manishkatyan/bbb-mp4:v2
