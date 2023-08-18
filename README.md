@@ -6,7 +6,7 @@
 
 <br /><br/>
 <div  align="center">
-https://www.loom.com/embed/6f047c254c2440fabcaa1cc1f8baad81??hide_owner=true&hide_title=true&hideEmbedTopBar=true
+https://www.loom.com/share/6f047c254c2440fabcaa1cc1f8baad81??hide_owner=true&hide_title=true&hideEmbedTopBar=true
 </div>
 <br/><br/>
 
