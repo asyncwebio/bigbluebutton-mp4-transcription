@@ -1,6 +1,13 @@
-# BigBlueButton-MP4-Transcription Plugin
+<div align="center">
+ <a href="https://higheredlab.com/" target="_blank"> <img alt="bbb-streaming" width="250" src="/static/hel-general-logo.png"> </a>
+</div>
+<h1 align="center">BigBlueButton Streaming</h1>
+<p align="center">BigBlueButton Mp4 and Transcription - Your free, open-source solution to enables automatic transcription and mp4 converstion of recorded sessions in BigBlueButton. With this plugin, you can easily convert your recorded sessions into text and mp4 formate, making it more accessible.</p>
 
-The BigBlueButton-MP4-Transcription Plugin is a powerful tool that enables automatic transcription and mp4 converstion of recorded sessions in BigBlueButton. With this plugin, you can easily convert your recorded sessions into text and mp4 formate, making it more accessible.
+<br /><br/>
+<img style="width: 100%; height: auto;" src="/static/bigbluebutton-streaming.gif" alt="bigbluebutton-streaming" /> <br/><br/>
+
+
 
 ## Table of Contents
 
