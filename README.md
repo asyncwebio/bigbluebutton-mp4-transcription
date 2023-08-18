@@ -1,7 +1,7 @@
 <div align="center">
  <a href="https://higheredlab.com/" target="_blank"> <img alt="bbb-streaming" width="250" src="/static/hel-general-logo.png"> </a>
 </div>
-<h1 align="center">BigBlueButton Streaming</h1>
+<h1 align="center">BigBlueButton MP4 and Transcription </h1>
 <p align="center">BigBlueButton Mp4 and Transcription - Your free, open-source solution to enables automatic transcription and mp4 converstion of recorded sessions in BigBlueButton. With this plugin, you can easily convert your recorded sessions into text and mp4 formate, making it more accessible.</p>
 
 <br /><br/>
