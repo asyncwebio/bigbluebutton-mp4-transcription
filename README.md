@@ -5,10 +5,7 @@
 <p align="center">BigBlueButton Mp4 and Transcription - Your free, open-source solution to enables automatic transcription and mp4 converstion of recorded sessions in BigBlueButton. With this plugin, you can easily convert your recorded sessions into text and mp4 formate, making it more accessible.</p>
 
 <br /><br/>
-<div  align="center">
-https://www.loom.com/share/6f047c254c2440fabcaa1cc1f8baad81??hide_owner=true&hide_title=true&hideEmbedTopBar=true
-</div>
-<br/><br/>
+<img style="width: 100%; height: auto;" src="/static/bigbluebutton-mp4-transcription.gif" alt="bigbluebutton-mp4-transcription" /> <br/><br/>
 
 
 
