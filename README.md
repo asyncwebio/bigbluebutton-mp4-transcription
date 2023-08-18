@@ -6,7 +6,7 @@
 
 <br /><br/>
 <div style="width: 100%; height: auto;">
- <a href="https://www.loom.com/share/6f047c254c2440fabcaa1cc1f8baad81?sid=ebaec384-dad3-4428-976c-aac6c13f3547">Demo</a>
+https://www.loom.com/share/6f047c254c2440fabcaa1cc1f8baad81?sid=ebaec384-dad3-4428-976c-aac6c13f3547
 </div>
 <br/><br/>
 
